@@ -11,12 +11,7 @@ const Logincontext = (props) => {
 
   const userloggedin = async () => {
     try {
-      const { data }=await axios.get("/",{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const { data }=await axios.get("/");
       if (!data) {
         userloggedout()
         localStorage.removeItem("token");
@@ -31,12 +26,7 @@ const Logincontext = (props) => {
 
   const userloggedout = async () => {
     try {
-      await axios.get("/user/signout", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await axios.get("/user/signout");
       localStorage.removeItem("token");
       setLogin(false);
     } catch (error) {
@@ -47,12 +37,7 @@ const Logincontext = (props) => {
 
   const logedinuser = async () => {
     try {
-      const response = await axios.post("/user",{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await axios.post("/user");
       setAdmin(response.data.student.admin);
     } catch (error) {
       console.log(error);
@@ -62,12 +47,7 @@ const Logincontext = (props) => {
 
   const allcourses = async () => {
     try {
-      const response = await axios.get("/course/allcourses",{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await axios.get("/course/allcourses");
       setallcourse(response.data);
     } catch (error) {
       console.log(error);
@@ -77,12 +57,7 @@ const Logincontext = (props) => {
 
   const accesscourse = async () => {
     try {
-      const { data } = await axios.post("/course/buyedcourse",{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const { data } = await axios.post("/course/buyedcourse");
       setbuyedcourse(data.coursebuy);
     } catch (error) {
       console.log(error);
