@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'https://learnify-server-2nte.onrender.com/',
     withCredentials:true
 
 })
@@ -17,5 +17,5 @@ instance.interceptors.request.use(
     (error) => Promise.reject(error)
   );
 
-  
+
 export default instance;
