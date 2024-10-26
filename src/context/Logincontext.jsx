@@ -47,7 +47,12 @@ const Logincontext = (props) => {
 
   const logedinuser = async () => {
     try {
-      const response = await axios.post("/user");
+      const response = await axios.post("/user",{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setAdmin(response.data.student.admin);
     } catch (error) {
       console.log(error);
@@ -57,7 +62,12 @@ const Logincontext = (props) => {
 
   const allcourses = async () => {
     try {
-      const response = await axios.get("/course/allcourses");
+      const response = await axios.get("/course/allcourses",{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setallcourse(response.data);
     } catch (error) {
       console.log(error);
@@ -67,7 +77,12 @@ const Logincontext = (props) => {
 
   const accesscourse = async () => {
     try {
-      const { data } = await axios.post("/course/buyedcourse");
+      const { data } = await axios.post("/course/buyedcourse",{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setbuyedcourse(data.coursebuy);
     } catch (error) {
       console.log(error);

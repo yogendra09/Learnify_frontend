@@ -42,6 +42,8 @@ const Login = () => {
       
       try {
        const {data} = await axios.post("/user/signin" , {email,password})
+       console.log(data.token);
+       
        localStorage.setItem("token", data.token);
         setLogin(true)
         navigate("/")
