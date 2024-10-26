@@ -53,7 +53,9 @@ const Register = () => {
       // Handle form submission
      
       try {
-        await axios.post("/user/signup", {email, firstname, lastname, password});
+      const {data} = await axios.post("/user/signup", {email, firstname, lastname, password});
+         console.log(data);
+         
         setLogin(true)
         navigate("/")
       } catch (error) {

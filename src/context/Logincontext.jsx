@@ -11,7 +11,17 @@ const Logincontext = (props) => {
 
   const userloggedin = async () => {
     try {
-      await axios.get("/");
+      const { data }=await axios.get("/",{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (!data) {
+        userloggedout()
+        localStorage.removeItem("token");
+        return;
+      }
       setLogin(true);
     } catch (error) {
       console.log(error);
@@ -21,7 +31,13 @@ const Logincontext = (props) => {
 
   const userloggedout = async () => {
     try {
-      await axios.get("/user/signout");
+      await axios.get("/user/signout", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      localStorage.removeItem("token");
       setLogin(false);
     } catch (error) {
       console.log(error);
